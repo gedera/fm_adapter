@@ -71,7 +71,17 @@ module FmTimbradoCfdi
   # uuid - Es el identificador de la factura a cancelar
   #
   # Regresa una respuesta SOAP
-  def cancelar(rfc, uuid)
-    cliente.cancelar(rfc, uuid)
+  #
+  # en opciones se debe enviar:
+  # { 'Motivo' => op1,
+  #   'FolioSustitucion' => Folio Fiscal del comprobante que lo sustituye (solo si Motivo es 01) }
+  #
+  # Motivo puede ser:
+  # 01 - Comprobantes emitidos con errores con relación
+  # 02 - Comprobantes emitidos con errores sin relación
+  # 03 - No se llevó a cabo la operación
+  # 04 - Operación nominativa relacionada en una factura global
+  def cancelar(rfc, uuid, opciones)
+    cliente.cancelar(rfc, uuid, opciones)
   end
 end
